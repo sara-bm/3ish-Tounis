@@ -5,6 +5,7 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 
 PDF_PATH = "./data/hannibal.pdf"
+PDF_PATH2 = "./data/Abou Qassim Bio.pdf"
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # Small & efficient
 
 def extract_text(pdf_path):
@@ -18,32 +19,34 @@ def embed_text(chunks, model):
     embeddings = model.encode(chunks, convert_to_numpy=True, show_progress_bar=True)
     return embeddings
 
-def save_faiss_index(embeddings, chunks, index_path="faiss_index"):
+def save_faiss_index(embeddings, chunks,embeddings_name, index_path):
     """Save embeddings to FAISS"""
     dimension = embeddings.shape[1]
     index = faiss.IndexFlatL2(dimension)
     index.add(embeddings)
 
-    with open("embeddings.pkl", "wb") as f:
+    with open(embeddings_name, "wb") as f:
         pickle.dump(chunks, f)
 
     faiss.write_index(index, index_path)
 
-def load_faiss_index(index_path="faiss_index"):
+def load_faiss_index(embeddings_name,index_path):
     """Load FAISS index"""
     index = faiss.read_index(index_path)
-    with open("embeddings.pkl", "rb") as f:
+    with open(embeddings_name, "rb") as f:
         chunks = pickle.load(f)
     return index, chunks
 
 if __name__ == "__main__":
     print("Extracting text from PDF...")
     text_chunks = extract_text(PDF_PATH)
-    
+    text_chunks2 = extract_text(PDF_PATH2)
     print("Generating embeddings...")
     model = SentenceTransformer(EMBEDDING_MODEL)
     embeddings = embed_text(text_chunks, model)
-
+    embeddings2 = embed_text(text_chunks2, model)
     print("Saving embeddings to FAISS...")
-    save_faiss_index(embeddings, text_chunks)
+    save_faiss_index(embeddings,text_chunks, "embeddings.pkl", "faiss_index")
+    save_faiss_index(embeddings2, text_chunks, "embeddings2.pkl", "faiss_index2")
     print("Embedding process complete!")
+
