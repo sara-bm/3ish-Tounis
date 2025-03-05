@@ -18,16 +18,38 @@ body {
     overflow: hidden;
 }
 
-.background-clip {
-    position: absolute;
-    top: 0;
-    left: 0;
+.main {
     width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    z-index: -1; 
+    height: 100vh;
+  }
+  
+video {
+width: 100%;
+height: 100%;
+object-fit: cover;
 }
 
+.content {
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+color: white;
+}
+  
+.overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,.4);
+/* background-color: #000000cc; */
+}
 nav {
     width: 100%; 
     display: flex;
@@ -335,9 +357,9 @@ nav ul li a:hover {
 
 .card-title{
     text-transform: uppercase;
-    font-size:35px;
+    font-size:25px;
     font-weight: bold;
-    color: wheat;
+    color: #945518;
 }
 
 
@@ -348,19 +370,7 @@ nav ul li a:hover {
     font-weight: 300;
 }
 
-.card-btn{
-    color: #0131a3;
-    background-color: #e8edef;
-    padding: 10px;
-    border-radius: 5px;
-    text-transform: capitalize;
-    border: none;
-    outline: none;
-    font-weight: 500;
-    cursor: pointer;
-    width: 120px;
-    margin-left: 23%;
-}
+
 
 footer {
     background-color: #8fa6d8; 
