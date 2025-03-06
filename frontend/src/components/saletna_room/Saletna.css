@@ -6,21 +6,20 @@
     box-sizing: border-box;
   }
   
-  body {
+  
+  /* Main container */
+  .saletna {
+    padding: 20px;
+  }
+  .Mar7ba-bik-fi-Saletna{
     font-family: Arial, sans-serif;
     background-image: url('image/tv.jpg'); /* Remplacez par le chemin de votre image */
     background-size: cover; /* Ajuste l'image pour couvrir toute la page */
     background-position: center; /* Centre l'image */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     color: white;
-    margin-right: 20px;
-    margin-left: 40px;
-}
 
-  
-  /* Main container */
-  .saletna {
-    padding: 20px;
+
   }
   
   /* Header */

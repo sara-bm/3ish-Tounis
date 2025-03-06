@@ -247,7 +247,7 @@ export default function Saletna() {
     };
 
   return (
-    <div className="Mar7ba bik fi Saletna">
+    <div className="Mar7ba-bik-fi-Saletna">
       <div className="header">
         <h1>Saletna</h1>
         <div className="search-container">
