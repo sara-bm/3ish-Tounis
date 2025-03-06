@@ -1,0 +1,114 @@
+/* Kitchen.css */
+
+.kitchen-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: url('./assets/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.kitchen-content {
+    display: flex;
+    align-items: start;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 66.6667%;
+    padding: 20px;
+    color: var(--backgroundColor);
+    text-align: left;
+}
+
+.kitchen-image {
+    width: 150px;  
+    height: auto;
+    margin-right: 20px;
+}
+
+.kitchen-title {
+    font-weight: 600;
+    font-size: 3rem;
+    color: white;
+    margin: 0;
+}
+
+/* Chat Area */
+.chat-container {
+    margin-top: 25px;
+    width: 400px;
+    max-width: 400px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Box */
+.chat-box {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    resize: none;
+    font-size: 16px;
+    overflow-y: auto;
+}
+
+/* Chat Input Area */
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Styled Input */
+.chat-input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #ccc;
+    font-size: 16px;
+    margin-top: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Focus Effect on Input */
+.chat-input:focus {
+    border-color: #ff6347;
+    box-shadow: 0 4px 6px rgba(255, 99, 71, 0.5);
+}
+
+.chat-send-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* Indicating the button is clickable */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    position: relative; /* To fix any overlap */
+    z-index: 10; /* Ensures the button is on top */
+  }
+  
+  .chat-send-btn:hover {
+    background-color: #e55347;
+    transform: translateY(-2px);
+  }
+
+/* Button Focus Effect */
+.chat-send-btn:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(255, 99, 71, 0.7);
+}
+
+.chat-send-btn:active {
+    transform: translateY(2px);
+}
