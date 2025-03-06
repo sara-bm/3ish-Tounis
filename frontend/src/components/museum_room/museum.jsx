@@ -7,6 +7,7 @@ import phones from './assets/phones.png'; // Replace with your phone image
 import character1 from './assets/abou_Qassim.jpg';
 import character2 from './assets/hannibal.jpg';
 import character3 from './assets/Tawhida_Ben_Cheikh.jpg';
+import character4 from './assets/aziza_othmana.jpg';
 
 const Header = () => {
     return (
@@ -142,6 +143,7 @@ const CharactersSection = () => {
       { name: 'أبو القاسم بن محمد الشَّابِّي', image: character1 },
       { name: 'حنبعل', image: character2 },
       { name: 'توحيدة بن الشيخ', image: character3 },
+      { name: 'عزيزة العثمانة', image: character4 },
     ];
     const handleCharacterClick = (index) => {
         if (index === 1) { // Navigate only when clicking the first character
@@ -152,6 +154,9 @@ const CharactersSection = () => {
         }
         if(index === 2){
             navigate('/chat-tawhida');
+        }
+        if(index===3){
+            navigate('/chat-aziza');
         }
     };
   

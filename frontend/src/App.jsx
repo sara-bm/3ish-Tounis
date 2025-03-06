@@ -10,6 +10,7 @@ import Kitchen from './components/kitchen_room/kitchen.jsx';
 import Saletna from './components/saletna_room/saletna.jsx';
 import QassimChat from './components/museum_room/QassimChat.jsx';
 import TawhidaChat from './components/museum_room/TawhidaChat.jsx';
+import AzizChat from './components/museum_room/AzizaChat.jsx';
 // import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/chat-hannibal" element={<Hannibalchat />} />
         <Route path="/chat-qassim" element={<QassimChat />} />
         <Route path="/chat-tawhida" element={<TawhidaChat />} />
+        <Route path="/chat-aziza" element={<AzizChat />} />
         <Route path="/tourism" element={<Tourism />} />
         <Route path="/elmaroo" element={<Clothes />} />
         <Route path="/koujinetna" element={<Kitchen />} />

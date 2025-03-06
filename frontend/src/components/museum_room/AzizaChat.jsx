@@ -1,12 +1,11 @@
-
 // ChatInterface.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import './css/chat_hannibal.css';
-import backgroundImage from './assets/qassim_background.webp';
+import backgroundImage from './assets/aziza_background.webp';
 
 const HannibalChat = () => {
   const [messages, setMessages] = useState([
-    { text: 'اهلا بصدق الدرب كيفاه نجم نعاون اخي في حب الوطن؟', sender: 'bot' },
+    { text: 'المعرفة هي المفتاح، والمرا التونسية قادرة توصل بعيد كي تتعلم وتخدم بالجد', sender: 'bot' },
   ]);
   const [input, setInput] = useState('');
   const [isBotTyping, setIsBotTyping] = useState(false);
@@ -22,7 +21,7 @@ const HannibalChat = () => {
 
     try {
       // Make API call to your FastAPI endpoint
-      const response = await fetch('http://127.0.0.1:8000/ask_qassim/', {
+      const response = await fetch('http://127.0.0.1:8000/ask_aziza/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +42,6 @@ const HannibalChat = () => {
     }
   };
 
-
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSendMessage();
@@ -57,9 +55,9 @@ const HannibalChat = () => {
   }, [messages]);
 
   return (
-    <div className="chat-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-                 <div className="chat-header">
-        <h1>أبو القاسم بن محمد الشَّابِّي</h1>
+    <div className="chat-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundPosition: "center", backgroundSize: "cover" }}>
+      <div className="chat-header">
+        <h1>عزيزة عثمانة</h1>
       </div>
       <div className="chat-box" ref={chatBoxRef}>
         {messages.map((msg, index) => (

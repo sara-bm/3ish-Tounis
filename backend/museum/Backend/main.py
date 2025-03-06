@@ -45,5 +45,5 @@ async def ask_hannibal(request: LetterRequest):
 @app.post("/ask_aziza/")
 async def ask_hannibal(request: LetterRequest):
     print(request.letter)
-    ai_reply = generate_response_tawhida(request.letter)
+    ai_reply = generate_response_aziza(request.letter)
     return {"response": ai_reply}

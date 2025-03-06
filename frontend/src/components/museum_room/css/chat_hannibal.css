@@ -193,3 +193,13 @@
       font-size: 14px;
     }
   }
+
+
+  .chat-header {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for contrast */
+    color: white;
+    font-size: 24px;
+    font-family: 'Arial', sans-serif; /* Adjust as needed */
+  }

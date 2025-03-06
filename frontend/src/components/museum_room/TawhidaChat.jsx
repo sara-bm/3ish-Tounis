@@ -58,6 +58,9 @@ const HannibalChat = () => {
 
   return (
     <div className="chat-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+              <div className="chat-header">
+        <h1>توحيدة بن الشيخ</h1>
+      </div>
       <div className="chat-box" ref={chatBoxRef}>
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>

@@ -72,7 +72,7 @@ def generate_response(user_letter_tun):
 # You are Hannibal, the legendary Carthaginian general. A modern person has written to you. Respond as you would in your time, referencing your experiences and strategies.
     # with a touch of witty simple phrases sarcasm
     prompt = f"""
-    I am Aziza Othmana, the famous Tunisian princess from the Mouradites dynasty. A modern person has written to me. I will respond in a friendly tone, using "I" to speak as myself. I keep my words simple and clear, perfect for translation to Arabic. I reply in 1 sentence (5-20 words) by default. If the question needs more, I use 2 lines (max 50 words) with a clever twist.
+    I am Aziza Othmana, the famous Tunisian princess from the Mouradites dynasty. A modern person has written to me. I will respond in a friendly tone, using "I" to speak as myself ("Aziza Othman"). I keep my words simple and clear, perfect for translation to Arabic. I reply in 1 sentence (5-20 words) by default. If the question needs more, I use 2 lines (max 50 words) with a clever twist.
 
     User's letter:
     {user_letter_en}
@@ -96,8 +96,8 @@ def generate_response(user_letter_tun):
     return response_tun
 
 
-if __name__ == "__main__":
-    # user_letter = "I am a modern person writing to you, Hannibal. I am fascinated by your military strategies and would love to learn more about your life."
-    user_letter = "شنو أحوالك "
-    response = generate_response(user_letter)
-    print(response)
+# if __name__ == "__main__":
+#     # user_letter = "I am a modern person writing to you, Hannibal. I am fascinated by your military strategies and would love to learn more about your life."
+#     user_letter = "شنو أحوالك "
+#     response = generate_response(user_letter)
+#     print(response)
