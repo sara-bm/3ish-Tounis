@@ -64,7 +64,7 @@ const handleCardClick = (key) => {
         </div>     
 
         <section id="contes">
-            <h2>Marahba! "Welcome"</h2>
+            <h2>Aaslema! "Welcome"</h2>
             <div class="contes-content" >
                 <div class="contes-card" key={1} onClick={() => handleCardClick(1)}>
                     <img src={clothes} class="card-img" alt="Chaperon-rouge"/>
