@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Clothes() {
+export default function Tourism() {
   return (
     <div>
       
