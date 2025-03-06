@@ -34,8 +34,8 @@ export default function Kitchen() {
         // Check the structure of the response
         console.log('Backend response:', data);
 
-        // Get the response based on the language, here it's assuming "response_en" or "response_tn"
-        const responseMessage = data.response_en || data.response_tn.message;
+        // Get the response message directly from response_tn or response_en
+        const responseMessage = data.response_tn || data.response_en;
 
         // Update the chat with the chef's response
         setChatMessages((prevMessages) => [

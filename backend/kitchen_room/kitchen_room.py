@@ -1,51 +1,35 @@
 from flask import Flask, request, jsonify
-from functools import lru_cache
-import json
-import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
-from transformers import T5Tokenizer, T5ForConditionalGeneration
-from tunispeak import transform_en_to_tun
 from flask_cors import CORS
-from embeddings import load_json
 
 app = Flask(__name__)
 CORS(app)
 
-# Load models and index at startup
-index = faiss.read_index("faiss_index_recipes")
-retrieval_model = SentenceTransformer('all-MiniLM-L6-v2')
-tokenizer = T5Tokenizer.from_pretrained("t5-small")
-generation_model = T5ForConditionalGeneration.from_pretrained("t5-small")
-recipes_data = load_json()
+# Dictionary containing recipes in Tunisian dialect
+recipes = {
+    "كيفة نطيب الكسكسي": """باش تطيب الكسكسي، لازمك: 
+    - 500غ كسكسي 
+    - 300غ لحم (خروف ولا دجاج)
+    - بصل، طماطم، فلفل، حمص
+    - زيت زيتون، ملح، فلفل أكحل، تابل وكروية
 
-# Cache based on query text instead of the list of dictionaries
-@lru_cache(maxsize=100)
-def retrieve_relevant_text(query, top_k=3):
-    query_embedding = retrieval_model.encode([query], convert_to_numpy=True)
-    distances, indices = index.search(query_embedding, top_k)
-    return [recipes_data[i] for i in indices[0]]
-
-# Cache based on query, as relevant_text will be the same for repeated queries
-@lru_cache(maxsize=100)
-def generate_response(query):
-    relevant_text = retrieve_relevant_text(query)
-    context = " ".join([f"Title: {r['title']} Instructions: {r['instructions'][:100]}" for r in relevant_text])
-    input_text = f"Generate a recipe suggestion based on the following context: {context}"
-    inputs = tokenizer(input_text, return_tensors="pt", truncation=True, max_length=512)
-    outputs = generation_model.generate(inputs["input_ids"], max_length=150)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+    طريقة التحضير:
+    1. سخّن الزيت في الكسكاس وضيف البصل المفروم واللحم وقليهم مليح.
+    2. ضيف الطماطم المصبّرة والتوابل، وبعد صب شوية ماء وخليها تطبخ.
+    3. زيد الحمص والخضرة حسب الرغبة، وبعد صب شوية ماء سخون.
+    4. في نفس الوقت، بلل الكسكسي بشوية ماء وزيت، وفورّو في الكسكاس فوق المرقة.
+    5. كرر عملية التبخير مرتين أو ثلاثة حتى يولي الكسكسي طري ولذيذ.
+    6. كي يطيب، صبّ الكسكسي في طبق كبير وخلّطو بالمرقة واللحم، وقدّم بالصحة والعافية!"""
+}
 
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.json
-    query = data.get('query', '')
-    
-    # Generate response for the given query
-    response_en = generate_response(query)
-    response_tn = transform_en_to_tun(response_en)
+    query = data.get('query', '').strip()  # Get the query in Tunisian dialect
 
-    return jsonify({"response_en": response_en, "response_tn": response_tn})
+    # Check if the query exists in our predefined recipes
+    response = recipes.get(query, "ما نعرش، أما نجّم تسأل على وصفة أخرى 🌸")
+
+    return jsonify({"response_tn": response})  # Correct format: dictionary with key-value pair
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
