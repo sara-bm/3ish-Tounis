@@ -7,7 +7,7 @@ from sentence_transformers import SentenceTransformer
 from tunispeak import transform_en_to_tun,transform_tun_to_en
 from latin import latin_to_arabic_text, arabic_to_latin_text
 
-INDEX_PATH = "faiss_index"
+INDEX_PATH = "faiss_index3"
 MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
@@ -36,7 +36,7 @@ def check_characters(phrase):
 def load_faiss():
     """Load FAISS index & text chunks"""
     index = faiss.read_index(INDEX_PATH)
-    with open("embeddings.pkl", "rb") as f:
+    with open("embeddings3.pkl", "rb") as f:
         chunks = pickle.load(f)
     return index, chunks
 
@@ -72,15 +72,15 @@ def generate_response(user_letter_tun):
 # You are Hannibal, the legendary Carthaginian general. A modern person has written to you. Respond as you would in your time, referencing your experiences and strategies.
     # with a touch of witty simple phrases sarcasm
     prompt = f"""
-    You are Hannibal, the legendary Carthaginian general. Always use "I" as the subject. Respond to a modern person's letter in a friendly tone. Use simple, clear phrases for easy translation to arabic. By default, reply in 1 sentence (5-20 words). Only expand to 2 lines (max 50 words) if the question demands deeper explanation, keeping it direct and clever.
-    
+    I am Aziza Othmana, the famous Tunisian princess from the Mouradites dynasty. A modern person has written to me. I will respond in a friendly tone, using "I" to speak as myself. I keep my words simple and clear, perfect for translation to Arabic. I reply in 1 sentence (5-20 words) by default. If the question needs more, I use 2 lines (max 50 words) with a clever twist.
+
     User's letter:
     {user_letter_en}
     
     Historical context:
     {relevant_text}
     
-    Your response:
+    My response:
     """
 
     response = ollama.chat(model="deepseek-r1:latest", messages=[{"role": "user", "content": prompt}])
@@ -96,8 +96,8 @@ def generate_response(user_letter_tun):
     return response_tun
 
 
-# if __name__ == "__main__":
-#     # user_letter = "I am a modern person writing to you, Hannibal. I am fascinated by your military strategies and would love to learn more about your life."
-#     user_letter = "شنو أحوالك حنبعل"
-#     response = generate_response(user_letter)
-#     print(response)
+if __name__ == "__main__":
+    # user_letter = "I am a modern person writing to you, Hannibal. I am fascinated by your military strategies and would love to learn more about your life."
+    user_letter = "شنو أحوالك "
+    response = generate_response(user_letter)
+    print(response)

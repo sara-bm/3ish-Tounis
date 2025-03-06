@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom'; 
-import './museum.css';
+import './css/museum.css';
 // import logo from '../assets/logo.png'; // Replace with your logo
 import phones from './assets/phones.png'; // Replace with your phone image
 // Placeholder images for characters (replace with actual images)
@@ -144,8 +144,14 @@ const CharactersSection = () => {
       { name: 'توحيدة بن الشيخ', image: character3 },
     ];
     const handleCharacterClick = (index) => {
-        if (index === 0) { // Navigate only when clicking the first character
+        if (index === 1) { // Navigate only when clicking the first character
             navigate('/chat-hannibal');
+        }
+        if(index === 0){
+            navigate('/chat-qassim');
+        }
+        if(index === 2){
+            navigate('/chat-tawhida');
         }
     };
   

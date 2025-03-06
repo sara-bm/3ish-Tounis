@@ -5,6 +5,7 @@ import pickle
 import re
 from sentence_transformers import SentenceTransformer
 from tunispeak import transform_en_to_tun,transform_tun_to_en
+from latin import latin_to_arabic_text, arabic_to_latin_text
 
 INDEX_PATH = "faiss_index2"
 MODEL = "sentence-transformers/all-MiniLM-L6-v2"
@@ -34,7 +35,37 @@ def remove_think_tags_robust(paragraph):
     result = re.sub(r'</?think>', '', result)
     return result
 
+
+def check_characters(phrase):
+    # Unicode ranges for Arabic and Latin characters
+    arabic_range = range(0x0600, 0x06FF)  # Basic Arabic block
+    # Latin letters only (A-Z and a-z)
+    latin_upper = range(0x0041, 0x005B)  # A-Z
+    latin_lower = range(0x0061, 0x007B)  # a-z
+    
+    has_arabic = False
+    has_latin = False
+    
+    for char in phrase:
+        char_code = ord(char)
+        if char_code in arabic_range:
+            has_arabic = True
+        elif char_code in latin_upper or char_code in latin_lower:
+            has_latin = True
+            
+    return {
+        "contains_arabic": has_arabic,
+        "contains_latin": has_latin
+    }
+
 def generate_response(user_letter_tun):
+    print(user_letter_tun)
+    check=check_characters(user_letter_tun)
+    print(check)
+    if check["contains_latin"]:
+        user_letter_tun=latin_to_arabic_text(user_letter_tun)
+        print("user letter after latin conversion ",user_letter_tun)
+
     user_letter_en=transform_tun_to_en(user_letter_tun)
     """Generate AI response using Ollama & DeepSeek R1"""
     relevant_text = retrieve_relevant_text(user_letter_en)
@@ -75,6 +106,11 @@ Craft your response as a direct reply to the user’s letter in {user_letter_en}
     print("english response",cleaned_response)  
     response_tun=transform_en_to_tun(cleaned_response)
     print(response_tun)
+    if check["contains_latin"]:
+        response_tun['message']=arabic_to_latin_text(response_tun['message'])
+        print("response after latin conversion ",
+              response_tun)
+
     return response_tun
 
 
